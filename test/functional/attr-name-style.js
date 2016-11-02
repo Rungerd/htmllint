@@ -4,7 +4,8 @@ module.exports = [
         input: '<div abc="" 2fOwj_0o-3="" 0r9jfFJ2=""></div>',
         opts: { 'attr-name-style': false },
         output: 0
-    }, {
+    },
+	{
         desc: 'should pass correctly styled attribute names',
         input: '<div abc="" fowj0wo3=""></div>',
         opts: { 'attr-name-style': 'lowercase' },
