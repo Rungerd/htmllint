@@ -45,6 +45,12 @@ function doTest(funcTest, testFile) {
             expected = funcTest.output;
 
         promise.then(function (output) {
+			if ( typeof funcTest.line !== 'undefined') {
+				expect(output[0].line).to.equal(funcTest.line)
+			}
+			if ( typeof funcTest.column !== 'undefined') {
+				expect(output[0].column).to.equal(funcTest.column)
+			}
             if (lodash.isNumber(expected)) {
                 // test expects a certain number of issues
                 expect(output).to.have.length(expected);

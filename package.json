@@ -15,7 +15,8 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "./node_modules/gulp/bin/gulp.js travis",
-    "testlocal": "gulp test"
+    "testlocal": "gulp test",
+    "build": "node ./scripts/build"
   },
   "license": "ISC",
   "devDependencies": {

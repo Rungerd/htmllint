@@ -4,7 +4,7 @@ var webpack = require('webpack');
 module.exports = {
   entry: './lib/index.js',
   output: {
-    path: __dirname,
+    path: __dirname+'/build',
     filename: 'htmllint-bundle-webpack.js',
     libraryTarget: 'var',
     library: 'htmllint'
