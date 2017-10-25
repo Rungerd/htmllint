@@ -15,7 +15,8 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "./node_modules/gulp/bin/gulp.js travis",
-    "testlocal": "gulp test"
+    "testlocal": "gulp test",
+    "build": "node ./scripts/build"
   },
   "license": "ISC",
   "devDependencies": {
@@ -34,13 +35,15 @@
     "jshint": "^2.9.5",
     "jshint-stylish": "^2.2.1",
     "mocha": "^3.5.0",
-    "plato": "^1.7.0"
+    "plato": "^1.7.0",
+    "webpack": "^3.8.1"
   },
   "dependencies": {
     "bulk-require": "^1.0.1",
     "htmlparser2": "^3.9.2",
     "lodash": "^4.17.4",
-    "promise": "^8.0.1"
+    "promise": "^8.0.1",
+    "request": "^2.83.0"
   },
   "browserify": {
     "transform": [
