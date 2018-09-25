@@ -158,5 +158,31 @@ module.exports = [
         ].join('\n'),
         opts: { 'indent-width': 4, 'indent-width-cont': true },
         output: 0
+    }, {
+        desc: 'indent-width-cont should allow spaces after tabs but not before',
+        input: [
+            '<body>',
+            '\t<div id="a"',
+            '\t     class="b">',
+            '\t     partial tabbing',
+            '\t </div>',
+            '  \t<p>illegal</p>',
+            '</body>'
+        ].join('\n'),
+        opts: { 'indent-style': 'tabs', 'indent-width-cont': true },
+        output: 2
+    }, {
+        desc: 'indent-width-cont should check lines with only spaces',
+        input: [
+            '<div>',
+            '     ',
+            '    <input type="button" />',
+            '</div>',
+            '<script>',
+            '  var foo = 1;',
+            '</script>'
+        ].join('\n'),
+        opts: { 'indent-width': 4, 'indent-width-cont': true },
+        output: 1
     }
 ];
