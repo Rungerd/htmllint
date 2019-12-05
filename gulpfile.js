@@ -15,7 +15,7 @@ var paths = {
 paths.test = [].concat(paths.testUnit, paths.testFunc);
 
 gulp.task('jscs', function () {
-    gulp.src(paths.src
+    return gulp.src(paths.src
              .concat(paths.test))
         .pipe(jscs())
         .pipe(jscs.reporter());
@@ -23,37 +23,37 @@ gulp.task('jscs', function () {
 
 // lints javascript files with eslint
 // edit .eslintrc for configuration
-gulp.task('lint', ['jscs'], function () {
+gulp.task('lint', gulp.series('jscs', function () {
     return gulp.src(paths.src
              .concat(paths.test)
              .concat('./gulpfile.js'))
         .pipe(eslint())
         .pipe(eslint.format());
-});
+}));
 
 // instruments js source code for coverage reporting
 gulp.task('istanbul', function (done) {
-    gulp.src(paths.src)
+    return gulp.src(paths.src)
         .pipe(istanbul())
         .pipe(istanbul.hookRequire())
         .on('finish', done);
 });
 
 // runs mocha tests
-gulp.task('test', ['istanbul'], function (done) {
+gulp.task('test', gulp.series('istanbul', function (done) {
     // expose globals here for now
     // move these into their own file if they grow
     global.chai = require('chai');
     global.chai.use(require('chai-as-promised'));
     global.expect = global.chai.expect;
 
-    gulp.src(paths.test, {read:false})
+    return gulp.src(paths.test, {read:false})
         .pipe(mocha({
             reporter: 'list'
         }))
         .pipe(istanbul.writeReports())
         .on('end', done);
-});
+}));
 
 // plato report
 // TODO: think bout this a bit more
@@ -90,22 +90,22 @@ gulp.task('jsdoc', function () {
         }));
 });
 
-gulp.task('doc:gen', ['jsdoc']);
+gulp.task('doc:gen', gulp.series('jsdoc'));
 
-gulp.task('doc:pub', ['doc:gen'], function () {
+gulp.task('doc:pub', gulp.series('jsdoc', function () {
     gulp.src(paths.site)
         .pipe(publish({
             cacheDir: '.tmp'
         }));
-});
+}));
 
 // runs on travis ci (lints, tests, and uploads to coveralls)
-gulp.task('travis', ['lint', 'test'], function () {
-    gulp.src('coverage/**/lcov.info')
+gulp.task('travis', gulp.series(gulp.parallel('lint', 'test'), function () {
+    return gulp.src('coverage/**/lcov.info')
         .pipe(coveralls());
-});
+}));
 
-gulp.task('default', [
+gulp.task('default', gulp.parallel(
     'lint',
     'test'
-]);
+));
