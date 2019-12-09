@@ -28,6 +28,11 @@ exec('webpack', function(err){
 
 
 
-	fs.writeFile(path.join(webpackConf.output.path,'htmllint.js'), wrapPackedFile(packedFile + ''));
-	console.log('Done!');
+	fs.writeFile(path.join(webpackConf.output.path,'htmllint.js'), wrapPackedFile(packedFile + ''), function(error){
+		if (err) {
+			console.error(`writeFile error: ${err}`);
+			return;
+		}
+		console.log('Done!');
+	});
 });

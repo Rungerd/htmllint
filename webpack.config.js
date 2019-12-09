@@ -1,5 +1,6 @@
 var path = require('path')
 var webpack = require('webpack');
+const TerserPlugin = require('terser-webpack-plugin')
 
 module.exports = {
   entry: './lib/index.js',
@@ -17,17 +18,22 @@ module.exports = {
     extensions: ['*', '.js', '.jsx', 'index.js', 'index.jsx', '.json', 'index.json']
   },
 
+  // optimization: {
+  //   minimizer: [new UglifyJsPlugin()],
+  // },
+
   plugins: [
-    new webpack.optimize.UglifyJsPlugin()
-  ],
+    new TerserPlugin({
+      parallel: true,
+      terserOptions: {
+        ecma: 6,
+      },
+    }),
+ ],
 
   module: {
     rules : [
-    ],
-    loaders: [
-        //{ test: /\.js$/, exclude: /node_modules/, loader: 'babel'},
-        { test: /\.jsx$/, exclude: /node_modules/, loader: 'babel'},
-        //{ test: /\.css$/, exclude: /static/, loader: 'style!css'}
+      { test: /\.jsx$/, exclude: /node_modules/, loader: 'babel'}
     ]
   }
 

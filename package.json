@@ -34,16 +34,21 @@
     "gulp-mocha": "^3.0.1",
     "jshint": "^2.10.2",
     "jshint-stylish": "^2.2.1",
-    "webpack": "^3.8.1"
     "mocha": "^6.1.4",
-    "plato": "^1.7.0"
+    "plato": "^1.7.0",
+    "terser-webpack-plugin": "^2.2.2",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
   },
   "dependencies": {
     "bulk-require": "^1.0.1",
     "htmlparser2": "^3.10.1",
     "lodash": "^4.17.11",
-    "promise": "^8.0.3"
-    "request": "^2.83.0"
+    "promise": "^8.0.3",
+    "request": "^2.83.0",
+    "require": "^2.4.20",
+    "yargs": "^15.0.2"
   },
   "browserify": {
     "transform": [
